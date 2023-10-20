@@ -65,6 +65,13 @@ async function run() {
       const result = await userCollection.insertOne(user);
       res.send(result);
     });
+
+app.patch('/user', async(req, res)=>{
+  
+})
+
+
+
     app.put("/product/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
