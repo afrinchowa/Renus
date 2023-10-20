@@ -30,13 +30,13 @@ async function run() {
     const productCollection = client.db("productDB").collection("product");
     const userCollection = client.db("productDB").collection("user");
 
+// get product data by id
+
     app.get("/product", async (req, res) => {
       const cursor = productCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
-
-
 
     app.get("/product/:id", async (req, res) => {
       const id = req.params.id;
@@ -51,6 +51,26 @@ async function run() {
       const result = await productCollection.insertOne(newProduct);
       res.send(result);
     });
+
+ // Add BrandNames
+app.post('/brandName', async (req, res) => {
+  try {
+    const brandName = req.body;
+    const result = await servicesBrandName.insertOne(brandName);
+    res.json({ message: 'Brand added successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+
+
+
+
+
     // user related api
     app.get("/user", async (req, res) => {
       const cursor = userCollection.find();
